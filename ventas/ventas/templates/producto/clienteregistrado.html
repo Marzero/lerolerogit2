@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+	<font color="ffffff">exito!</font>
+	<div class="tebladeregistro">	
+		<table border="0" align="center" class="tablamuestra">
+			<thead>
+				<tr>
+					
+					<th>usuario</th>
+					<th>usuario</th>
+					<th>fecha de nacimiento</th>
+					<th>sexo</th>
+					<th>ci</th>
+					<th>telefono</th>
+				</tr>
+			</thead>
+			{%for item in form%}
+				<tr>
+					<td>{{item.User}}</td>
+					<td>{{item.User}}</td>
+					<td>{{item.fecha_nacimiento}}</td>
+					<td>{{item.sexo}}</td>
+					<td>{{item.ci}}</td>
+					<td>{{item.telefono}}</td>
+				</tr>
+			{%endfor%}
+		</table>
+	</div>
+
+{% endblock %}

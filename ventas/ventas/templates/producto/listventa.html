@@ -1,0 +1,66 @@
+
+{% block contenido %}
+    <style>
+     h2{color: white; display: block; background: royalblue; padding: 10px; text-align: center;}
+     table { padding: 5px;}
+     th{ color: midnightblue; background: skyblue;}
+     #items tr.item-row td { border: 0; vertical-align: top; }
+    </style>
+    <div>
+        <h2>Reporte de Ventas</h2>
+    </div>
+    <table border="1px" width="80%" align="center">
+    <th>
+        Cliente
+    </th>
+    <th>
+        Producto
+    </th>
+    <th>
+        Descripcion
+    </th>
+    <th>
+        Cantidad
+    </th>
+    <th>
+        Precio
+    </th>
+    <th>
+        Precio total
+    </th>
+    <th>
+        link para la factura
+    </th>
+     {% for i in pedido %}
+        <tr class="item-row">
+            <td>
+                {{ i.cliente }}
+            </td>
+            <td>
+                {% for tag in i.producto.all %}
+                    {{tag.nombre}}<br>
+                {% endfor %}
+            </td>
+            <td >
+                {% for tag in i.producto.all %}
+                    {{tag.descripcion}}<br>
+                {% endfor %}
+            </td>
+            <td>
+                {{ i.cantidad }}
+            </td>
+            <td>
+                {% for tag in i.producto.all %}
+                    {{tag.precio}}<br>
+                {% endfor %}
+            </td>
+            <td>
+                {{ i.precio_total}}
+            </td>
+            <td><li><a href="/facturacion/{{i.id}}/">vista previa de factura</a></li></td>
+        </tr>
+    {% endfor %}
+    </table>
+    <center><a href="/crear/reporteventas/"  class="btn">IMPRIMIR</a></center>
+    <CENTER><a href="/reporte/"  class="btn">REGRESAR</a></CENTER>
+{% endblock %}

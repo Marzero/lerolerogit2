@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block contenido %}
+    <div class="caja">
+        <div class="contenedor" id="registro">
+            <form  action="" method="post" id="fregistro" class="formulario">
+                <h2>Registro usuario</h2>
+                {% csrf_token %}
+                {{ formulario.as_ul }}
+                {{ formulario2.as_ul }}
+                <li class="para_botones"><input type="submit" name="bingresar" value="Registrar"></li>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block contenido %}
+    <div class="caja">
+        <div class="contenedor">
+            <h2>Lista</h2>
+            <ul>
+                {% for i in usuarios %}
+                    <li><a href="/usuario/{{ i.id }}/">{{ i.username }}</a> </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

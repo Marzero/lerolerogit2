@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %} Producto {{producto.nombre}} {% endblock %}
+{%block content %}
+<h1> {{ producto.nombre }}</h1><br>
+
+<p> {{ producto.descripcion }}</p>
+
+<br>
+
+
+
+		
+	
+<a class="btn btn-primary" href="javascript:window.history.go(-1);"> Regresar a la Lista </a>
+{% endblock %}

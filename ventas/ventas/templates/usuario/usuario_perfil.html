@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block contenido %}
+    <div class="caja">
+        <div class="contenedor" id="perfil">
+            <p>
+            <ul>
+                <li><h3>Bienvenido {{nombre}}</h3></li>
+                <li>Nombre de usuario : {{usuario.username}}</li>
+                <li>Email : {{usuario.email}}</li>
+                <li><h3>Datos Perfil</h3></li>
+                <li>Ci : {{perfil.ci}}</li>
+                <li>Fecha de nacimiento : {{perfil.fecha_nacimiento}}</li>
+            </ul>
+            </p>
+        </div>
+    </div>
+{% endblock %}

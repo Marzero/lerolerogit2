@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block content %}
+	<div id="formulario">
+		<table>
+			<h3>se buscara la relacion de elementos en base a la placa madre</h3>
+			<td>
+				<tr>
+					<th>ids</th>
+					<th>Nombre</th>
+				</tr>
+			{% for item in lista2 %}
+				
+				<tr>
+					<td>{{item.id}}</td>
+					<td>{{item.nombre}}</td>
+				</tr>
+			{% endfor %}	
+			</td>
+				<form method="POST">
+					{% csrf_token%}
+					<select name="art1">
+			            <option value="0">Tarjeta Madre</option>
+			            {% for idss in idval %}
+			                <option value="{{idss}}">{{idss}}</option>
+			            {% endfor %}
+					</select>
+					<select name="art2">
+			            <option value="0">Procesadores</option>
+			            {% for idss2 in idval %}
+			                <option value="{{idss2}}">{{idss2}}</option>
+			            {% endfor %}
+					</select>
+					<select name="art3">
+			            <option value="0">Memoria RAM</option>
+			            {% for idss3 in idval %}
+			                <option value="{{idss3}}">{{idss3}}</option>
+			            {% endfor %}
+					</select>
+					<select name="art4">
+			            <option value="0">Disco duro</option>
+			            {% for idss4 in idval %}
+			                <option value="{{idss4}}">{{idss4}}</option>
+			            {% endfor %}
+					</select>
+					<select name="art5">
+			            <option value="0">Tarjeta de video</video></option>
+			            {% for idss5 in idval %}
+			                <option value="{{idss5}}">{{idss5}}</option>
+			            {% endfor %}
+					</select>
+					<select name="art6">
+			            <option value="0">tarjeta de sonido</option>
+			            {% for idss6 in idval %}
+			                <option value="{{idss6}}">{{idss6}}</option>
+			            {% endfor %}
+					</select>	
+					
+					<input type="submit" value="Ver Compatibilidad" method="POST">
+						<input type="reset" value="Reset">
+				</form>
+		</table>
+	</div>
+	
+	<div>
+		<h6>{{mensaje}}</h6>
+		<h6>{{mensaje2}}</h6>
+		<h6>{{mensaje3}}</h6>
+		<h6>{{mensaje4}}</h6>
+		<h6>{{mensaje5}}</h6>
+	</div>
+{% endblock %}

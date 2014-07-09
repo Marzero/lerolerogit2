@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block content %}
+	<div id="formulario">
+			<form action="" method="post" id="form_reg_estudiante">
+		<fieldset>Registro de Usuarios</fieldset>
+		{% csrf_token %}
+			{{formulario.as_p}}
+			{{formulario2.as_p}}
+		    <!--<p>
+		        <label>Sexo:</label>
+		        <input type="radio" name="rsexo" value="1">Hombre
+		        <input type="radio" name="rsexo" value="0">Mujer
+		    </p>-->
+		    <p>
+		        <label>Fecha de nacimiento :</label>
+		        <select name="sdia">
+		            <option value="0">Dia</option>
+		            {% for dia in listadia %}
+		                <option value="{{dia}}">{{dia}}</option>
+		            {% endfor %}
+		        </select>
+		        <select name="smes">
+		            <option value="0">Mes</option>
+		            {% for mes in listames %}
+		                <option value="{{mes}}">{{mes}}</option>
+		            {% endfor %}
+		        </select>
+		        <select name="sanio">
+		            <option value="0">Año</option>
+		            {% for anio in listaanio %}
+		                <option value="{{anio}}">{{anio}}</option>
+		            {% endfor %}
+		        </select>
+		    </p>
+			<input type="submit" name="bregistro" value="Registar">
+		</form>
+	</div>
+
+	<div class="tebladeregistro">	
+		<table border="0" align="center" class="tablamuestra">
+			<thead>
+				<tr>
+					
+					<th>usuario</th>
+					<th>usuario</th>
+					<th>fecha de nacimiento</th>
+					<th>sexo</th>
+					<th>ci</th>
+					<th>telefono</th>
+				</tr>
+			</thead>
+			{%for item in form2%}
+				<tr>
+					<td>{{item.User}}</td>
+					<td>{{item.User}}</td>
+					<td>{{item.fecha_nacimiento}}</td>
+					<td>{{item.sexo}}</td>
+					<td>{{item.ci}}</td>
+					<td>{{item.telefono}}</td>
+				</tr>
+			{%endfor%}
+		</table>
+	</div>
+{% endblock %}

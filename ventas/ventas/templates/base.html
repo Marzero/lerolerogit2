@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <title>Proyecto Demo</title>
+    <!-- Le styles -->
+    <link href="/media/bootstrap/css/bootstrap.css" rel="stylesheet">
+     <link href="/media/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <script src="/media/js/jquery.js"></script>
+    <script src="/media/js/jquery.form.min.js"></script>
+    <script src="/media/js/demo.js"></script>
+    <script src="/media/bootstrap/js/bootstrap.js"></script>
+    <!-- los estilo de yo -->
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/estilo.css"/>
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/reveal.css"/>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.6.3.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.reveal.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/script.js"></script>
+    <link rel="stylesheet" href="{{ STATIC_URL }}jqtransformplugin/jqtransform.css">
+    <script type="text/javascript" src="{{ STATIC_URL }}jqtransformplugin/jquery.jqtransform.js"></script>
+
+   <script language="javascript">
+        $(function(){
+            $("form").jqTransform({imgPath:'jqtransformplugin/img/'});
+        });
+    </script>
+
+
+
+
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+    </style>
+    <script type="text/javascript">
+        $(document).on('ready',function(){
+              $.ajax({
+                  type:"GET",
+                  contentType:"application/json; charset=utf-8",
+                  dateType:"json",
+                  url:"/ws/productos/",
+                  success:function(response){
+                          var i = (response.length-1)-2;
+                          for(i;i<=(response.length-1);i++){
+                              $('#ProductosNuevos').append("<li>"+response[i].fields.nombre+"</li>");
+                          }    
+                  }
+              });
+              $get('/getcart/',function(data){
+                $get('#cuerpo_carrito').html(data)
+              });
+        });
+    </script>
+  </head>
+  <body>
+
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="#">Proyecto Ventas </a>
+            {% if user.is_authenticated %}
+            <p class="navbar-text pull-right">
+              Bienvenido {{ user.username }}
+            </p>
+            {% endif %}
+            <ul class="nav">
+              <li><a href="/productos/page/1/">Productos</a></li>
+              <li><a href="#">Contacto</a></li>
+              <li><a href="/categoria/page/1/">Categoria</a></li>
+              <li><a href="/registro/">Registro admin</a></li>
+              {% if user.is_authenticated and user.is_staff %}
+                <li><a href="/clienteregistrados/">usuarios</a></li>
+              {%endif%}
+              <li><a href="/productos/">Productos</a></li>
+              <li><a href="/comparador/">comparador</a></li>
+                {% if user.is_authenticated and user.is_staff %}
+                <li><a href="/reporte/">reportes</a></li>
+                {% endif %}
+              {% if user.is_authenticated %}
+                
+              {%else%}
+                <li><a href="/registrarcliente/">Registrese</a></li>
+              {%endif%}
+             
+
+              {% if user.is_authenticated %}
+        <li><a href="{% url "vista_logout" %}"> Cerrar Sesion </a></li>
+    {% else %}
+        <li><a href="/usuario/ingresar/"> Login </a></li>
+    {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span9">
+          <div class="hero-unit">
+
+                <li>
+                   <form action="/buscar/" name="" id="fbuscar" method="post">
+                       {% csrf_token %}
+                       <label>Buscar producto :</label><input id="id_texto" maxlength="50" name="texto" type="text" />
+                       <input type="submit" value="Buscar">
+                   </form>
+                   <div class="resultados">
+                   </div>
+               </li>
+
+
+            {% block content %}
+            {% endblock%}
+          </div>
+        </div><!--/span-->
+        <div class="span3">
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li class="nav-header">Mi perfil</li>
+              <br><p align="justify">
+              {%if user.is_authenticated %}
+                <p>Bienvenido {{ user }} </p>
+                <img src="{{get_image_profile}}" width="50px" heigth="50px"/>
+              {% else %}
+                <a href="/usuario/ingresar/" class="btn btn-primary">Login<a>
+              {% endif %}
+              </p>
+            </ul>
+          </div><!--/.well -->
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+               {% if user.is_authenticated %}
+              <li class="nav-header">Mi Carrito</li>
+              <br><p align="justify">
+                Carrito de Super {{ user.username}}
+              </p>
+              <div id="cuerpo_carrito">
+
+              </div>  
+                {% else %}
+                <p>por favor <a href="/usuario/ingresar/">identifiquese </a></p>
+               {% endif %}
+            </ul>
+          </div><!--/.well -->
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list" id="ProductosNuevos">
+              <li class="nav-header">Nuevos Productos</li>
+              
+            </ul>
+          </div><!--/.well -->
+           
+        </div><!--/span-->
+      </div><!--/row-->
+      <hr>
+      <footer>
+        
+      </footer>
+    </div><!--/.fluid-container-->
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+  </body>
+</html>

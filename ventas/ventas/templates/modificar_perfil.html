@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block contenido %}
+    <div class="caja">
+        <div class="contenedor" id="registro">
+            <h2>Registro usuario</h2>
+            <form  action="" method="post" id="fregistro" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ formulario.as_p }}
+                <input type="submit" name="bguardar" value="Guardar">
+            </form>
+        </div>
+    </div>
+    {{ perfil }}
+{% endblock %}

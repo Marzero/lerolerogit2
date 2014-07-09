@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block producto %}
+    <div class="caja">
+        <div class="contenedor" id="producto">
+           <label>ID :</label>  {{ producto.id }} </br>
+           <label>Nombre :</label>{{ producto.nombre }} </br>
+            <img src="/media/{{ producto.imagen }}"> </br>
+           <label>Precio</label> {{ producto.precio }} $</br>
+        </div>
+    </div>
+{% endblock %}

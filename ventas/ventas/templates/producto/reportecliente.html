@@ -1,0 +1,40 @@
+{% block contenido %}
+    <style>
+     h2{color: white; display: block; background: royalblue; padding: 10px; text-align: center;}
+     table { padding: 5px;}
+     th{ color: midnightblue; background: skyblue;}
+    </style>
+    <div>
+        <h2>Reporte de clientes</h2>
+    </div>
+    <table border="1px" width="80%" align="center">
+     <th>
+        Cliente
+    </th>
+    <th>
+        Fecha de nacimiento
+    </th>
+    <th>
+        Telefono
+    </th>
+    <th>
+        CI
+    </th>
+    {% for i in clien %}
+        <tr>
+            <td>
+                {{ i.User }}
+            </td>
+            <td>
+                {{ i.fecha_nacimiento}}
+            </td>
+            <td>
+                {{ i.ci}}
+            </td>
+            <td>
+                {{ i.telefono }}
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}

@@ -1,0 +1,41 @@
+<style>
+     h2{color: white; display: block; background: royalblue; padding: 10px; text-align: center;}
+     table { padding: 5px;}
+     th{ color: midnightblue; background: skyblue;}
+     #items tr.item-row td { border: 0; vertical-align: top; }
+    </style>
+    <div>
+        <h2>Reporte de Ventas</h2>
+    </div>
+<table border="1px" width="80%" align="center">
+    <th>
+        Cliente
+    </th>
+    <th>
+        Fecha de nacimiento
+    </th>
+    <th>
+        Telefono
+    </th>
+    <th>
+        CI
+    </th>
+    {% for i in rpro %}
+        <tr>
+            <td>
+                {{ i.User }}
+            </td>
+            <td>
+                {{ i.fecha}}
+            </td>
+            <td>
+                {{ i.ci}}
+            </td>
+            <td>
+                {{ i.telefono }}
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+<center><a href="/crear/reportecliente/"  class="btn">imprimir</a></center>
+<center><a href="/reporte/"  class="btn">REGRESAR</a></center>

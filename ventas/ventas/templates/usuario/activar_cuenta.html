@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block contenido %}
+    <div class="caja">
+        <div class="contenedor" id="registro">
+            <h2>Activar Cuenta</h2>
+            <form  action="" method="post">
+                {% csrf_token %}
+                {{ formulario.as_p }}
+                <input type="submit" name="bactivar" value="Activar">
+            </form>
+        </div>
+    </div>
+{% endblock %}

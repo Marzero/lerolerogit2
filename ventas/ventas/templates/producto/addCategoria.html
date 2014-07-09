@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block content%}
+<div id="formulario">
+		<form action="" method="post" id="form_reg_estudiante">
+			{% csrf_token%}
+			
+			<!--{{form.as_ul}}
+	nombreCategoria=models.CharField(max_length=200)
+	fecha=models.DateField()
+		-->
+
+			<table align="center" border="0">
+			<label><h1>Registro categoria</h1></label>
+			<tr>
+				<td>
+					<label>nombreCategoria:</label>
+				</td>
+				<td>
+					<div class="cuadros">
+					{{form.nombre}}
+					</div>
+				</td>
+				<td>
+					<div class="cuadros">
+					{{form.nombre.errors}}
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>Descripcion:</label>
+				</td>
+				<td>
+					<div class="cuadros">
+					{{form.descripcion}}
+					</div>
+				</td>
+				<td>
+					{{form.descripcion.errors}}
+				</td>
+			</tr>
+			
+			<tr aling="center">
+				<td aling="center" colspan="3">
+					<input type="submit" class="btn btn-small btn-primary" value="Guardar" >
+			<input type="reset" value="Limpiar">
+				</td>
+			</tr>
+		</table>
+		</form>
+
+	</div>
+
+
+<!--	<form action="." method="POST">
+		{% csrf_token %}
+		{{form.as_p}}
+		<input type="submit" value="Grabar">
+		<input type="reset" value="Limpiar">
+	</form>
+	nombreCategoria=models.CharField(max_length=200)
+	fecha=models.DateField()
+-->
+
+	<table class="tablamuestra">
+		<tr>
+			<td>Categorias</td>
+			<td>Descripcion</td>
+		</tr>
+		{%for item in catego%}
+			<tr>
+				<td>{{item.nombre}}</td>
+				<td>{{item.descripcion}}</td>
+			</tr>
+
+		{%endfor%}
+	</table>
+
+	<font color="000000">{{informacion}}</font>
+	<a class="btn btn-primary" href="javascript:window.history.go(-1);"> Regresar a la Lista </a>
+ {% endblock %}

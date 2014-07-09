@@ -1,0 +1,41 @@
+{% block contenido %}
+    <style>
+     h2{color: white; display: block; background: royalblue; padding: 10px; text-align: center;}
+     table { padding: 5px;}
+     th{ color: midnightblue; background: skyblue;}
+    </style>
+    <div>
+        <h2>Reporte de Productos</h2>
+    </div>
+    <table border="1px" width="80%" align="center">
+    <th>
+        Producto
+    </th>
+    <th>
+        Cantidad
+    </th>
+    <th>
+        Precio
+    </th>
+    <th>
+        Descripcion
+    </th>
+     {% for i in rpro %}
+        <tr>
+            <td>
+                {{ i.nombre }}
+            </td>
+            <td>
+                {{ i.stock}}
+            </td>
+            <td>
+                {{ i.precio }}
+            </td>
+            <td>
+                {{ i.descripcion }}
+            </td>
+
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}

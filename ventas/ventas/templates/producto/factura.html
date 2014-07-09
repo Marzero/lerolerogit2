@@ -1,0 +1,118 @@
+<style>
+        #page-wrap { width: 80%;  font: 14px/1.4 Georgia, serif; }
+
+#page-wrap p { border: 0; font: 14px Georgia, Serif; overflow: hidden; resize: none; }
+#page-wrap table { border-collapse: collapse; }
+#page-wrap table td,#page-wrap table th { border: 1px solid black; padding: 5px; }
+
+#header {  width: 40%; margin: 20px 0; background: #222; text-align: center; color: white; font: bold 15px Helvetica, Sans-Serif; text-decoration: uppercase; }
+
+#address { width: 250px; height: 150px; float: left; }
+#customer { overflow: hidden; }
+
+#logo { text-align: right; float: right; position: relative; margin-top: 25px; border: 1px solid #fff; max-width: 540px; max-height: 100px; overflow: hidden; }
+#header{ width:100%}
+
+#meta { margin-top: 1px; width: 300px; float: right; }
+#meta td { text-align: right;  }
+#meta td.meta-head { text-align: left; background: #eee; }
+#meta td textarea { width: 100%; height: 20px; text-align: right; }
+
+#items { clear: both; width: 100%; margin: 30px 0 0 0; border: 1px solid black; }
+#items th { background: #eee; }
+#items textarea { width: 80px; height: 50px; }
+#items tr.item-row td { border: 0; vertical-align: top; }
+#items td.description { width: 300px; }
+#items td.item-name { width: 175px; }
+#items td.description textarea, #items td.item-name textarea { width: 100%; }
+#items td.total-line { border-right: 0; text-align: right; }
+#items td.total-value { border-left: 0; padding: 10px; }
+#items td.total-value textarea { height: 20px; background: none; }
+#items td.balance { background: #eee; }
+#items td.blank { border: 0; }
+
+#terms { text-align: center; margin: 20px 0 0 0; }
+#terms h5 { text-transform: uppercase; font: 13px Helvetica, Sans-Serif; border-bottom: 1px solid black; padding: 0 0 8px 0; margin: 0 0 8px 0; }
+#terms textarea { width: 100%; text-align: center;}
+
+#page-wrap textarea:hover, #page-wrap textarea:focus, #items td.total-value textarea:hover, #items td.total-value textarea:focus, .delete:hover { background-color:#EEFF88; }
+
+#image{
+    width:100px;
+}
+</style>
+
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<body>
+   <div id="page-wrap">
+      <p id="header">Tienda Online</p>
+      <div id="identity">
+            <p id="address">{{ user.username }} {{ user.first_name }}<br>
+                            {{ cliente.ci }}<br>
+                            {{ user.direccion }}<br>
+                            Telefono: 62-46755<br>
+                            Ciudad : Potosi<br>
+            </p>
+            
+      </div>
+      <div style="clear:both"></div>
+      <div id="customer">
+            <table id="meta">
+                <tr>
+                    <td class="meta-head">Pre-Factura #</td>
+                    <td><p>{{ 456 }}</p></td>
+                </tr>
+                <!--<tr>
+                    <td class="meta-head">Fecha</td>
+                    <td><p id="date">{{ fecha }}</p></td>
+                </tr>-->
+                <tr>
+                    <td class="meta-head">Monto Total</td>
+                    <td><div class="due">${{ pedido.precio_total}}</div></td>
+                </tr>
+            </table>
+      </div>
+      <table id="items">
+        <tr>
+            <th>Articulo</th>
+            <th>Imagen</th>
+            <th>Descripcion</th>
+            <th>Costo/U.</th>
+            <th>Cant.</th>
+            <th>Precio</th>
+        </tr>
+        <tr class="item-row">
+            <td class="item-name"><p>
+                {% for tag in pedido.producto.all %}
+                    {{tag.nombre}}<br>
+                {% endfor %}</p></div></td>
+            <td id="logo"><p>
+                {% for tag in pedido.producto.all %}
+                    <center><img id="image" src="/media/{{ tag.imagen }}" width="100px" heigth="100px" alt="logo"/></center>
+                {% endfor %}</p></td>
+            <td class="description"><p>
+                {% for tag in pedido.producto.all %}
+                    {{tag.descripcion}}<br>
+                {% endfor %}</p></td>
+            <td><p class="cost">$
+                {% for tag in pedido.producto.all %}
+                    {{tag.precio}}<br>
+                {% endfor %}</p></td>
+            <td><p class="qty">{{ pedido.cantidad }}</p></td>
+            <td><span class="price">${{ pedido.precio_total}}</span></td>
+        </tr>        <tr>
+            <td colspan="3" class="blank"> </td>
+            <td colspan="2" class="total-line">Total</td>
+            <td class="total-value"><div id="total">${{pedido.precio_total}}</div></td>
+        </tr>
+      </table>
+      <div id="terms">
+        <h5>Terminos</h5>
+        <p>El total del envio sera cubierto completamente por el cliente. 15 dias habiles para la devolucion del producto.</p>
+      </div>
+   </div>
+   <center><a href="/reporfactura/{{pedido.id}}"  class="btn">IMPRIMIR</a></center>
+   <center><a href="/lventas/"  class="btn">REGRESAR</a></center>
+</body>
+</html>
